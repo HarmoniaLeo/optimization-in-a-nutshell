@@ -4,15 +4,19 @@ from scipy import linalg
 from lagb import *	#线性代数工具库
 
 n=4	#待定系数数
-y=np.array([])
-t=np.array([])
+y=np.array([0.1957,0.1947,0.1735,0.1600,0.0844,0.0627,0.0456,0.0342,0.0323,0.0235,0.0246])
+t=np.array([4,2,1,0.5,0.25,0.1670,0.1250,0.1000,0.0833,0.0714,0.0625])
 #样本列表
 
-def myFunc(x):
-    return #目标方程（残差平方和的0.5倍）
 
-def r(x):
-    return #残差方程。y=y[int(x[n+1])]，t=t[int(x[n+1])]
+def myFunc(x):  #目标函数（残差平方和的0.5倍）
+    return 1/2*np.sum(np.square(y-x[0]*(t**2+x[1]*t)/(t**2+x[2]*t+x[3])))
+
+def r(x):   #残差函数
+    yi = y[int(x[n])]
+    ti = t[int(x[n])]
+    fxt = x[0]*(ti**2+x[1]*ti)/(ti**2+x[2]*ti+x[3]) #原函数
+    return yi - fxt
 
 def Jaccobi(x):
     tar=Function(r)
@@ -47,3 +51,4 @@ while tar.norm(np.concatenate((x,t)))>e:
         x+=d
     k+=1
     print(k)
+print(x)

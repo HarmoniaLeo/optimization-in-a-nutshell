@@ -3,10 +3,10 @@ from Function import Function	#定义法求导工具
 from lagb import *	#线性代数工具库
 from scipy import linalg
 
-n=4 #x的长度
+n=2	#x的长度
 
-def myFunc(x):
-    return  #目标方程
+def myFunc(x):  #x是一个包含所有参数的列表
+    return x[0]**2 + 2*x[1]**2 + 2*x[0] - 6*x[1] +1 #目标函数
 
 k=0
 x=np.zeros(n)	#初始值点
@@ -41,3 +41,4 @@ while tar.norm(x)>e:
     x=x1
     k+=1
     print(k)
+print(x)
